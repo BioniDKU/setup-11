@@ -120,7 +120,7 @@ Start-DownloadLoop $dlep ep_setup.exe "Explorer Patcher"
 
 $wu = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU" -ErrorAction SilentlyContinue).WUmode
 if ($wu -eq 1) {
-	Start-DownloadLoop "https://github.com/Bionic-OSE/BioniDKU/raw/main/PATCHME.ps1" "PATCHME.ps1" "UBR information file"
+	Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU/raw/main/PATCHME.ps1" "PATCHME.ps1" "UBR information file"
 	Write-Host " "
 	Write-Host -ForegroundColor Cyan -BackgroundColor DarkGray "Downloading and installing PSWindowsUpdate"
 	Install-PackageProvider -Name "NuGet" -Verbose -Force

@@ -23,9 +23,9 @@ function Start-DownloadLoop($link,$destfile,$name,$descr) {
 	}
 }
 
-Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU-hikaru/releases/latest/download/Hikaru.7z" "Hikaru.7z" "Getting Hikaru-chan" "Downloading soft (script) layer"
-Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU-hikaru/releases/latest/download/Hikare.7z" "Hikare.7z" "Getting Hikaru-chan" "Downloading hard (executables) layer"
-Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU-hikaru/releases/latest/download/Hikarinfo.ps1" "Hikarinfo.ps1" "Getting Hikaru-chan" "Downloading release information file"
+Start-DownloadLoop "https://github.com/Bionic-OSE/BioniDKU-hikaru/releases/latest/download/Hikaru.7z" "Hikaru.7z" "Getting Hikaru-chan" "Downloading soft (script) layer"
+Start-DownloadLoop "https://github.com/Bionic-OSE/BioniDKU-hikaru/releases/latest/download/Hikare.7z" "Hikare.7z" "Getting Hikaru-chan" "Downloading hard (executables) layer"
+Start-DownloadLoop "https://github.com/Bionic-OSE/BioniDKU-hikaru/releases/latest/download/Hikarinfo.ps1" "Hikarinfo.ps1" "Getting Hikaru-chan" "Downloading release information file"
 Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU-utils/raw/utils/active/ambient.zip" "ambient.zip" "Getting ambient sounds package" " "
 Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU-utils/raw/utils/active/YuumeiDKUL.jpg" "YuumeiDKUL.jpg" "Getting desktop background image" "Downloading Light variant"
 Start-DownloadLoop "https://github.com/Bionic-OSE/YuumeiDKU-utils/raw/utils/active/YuumeiDKUD.jpg" "YuumeiDKUD.jpg" "Getting desktop background image" "Downloading Dark variant"
@@ -35,5 +35,5 @@ Start-Process $PSScriptRoot\..\core\7za.exe -Wait -NoNewWindow -ArgumentList "x 
 Start-Process $PSScriptRoot\..\core\7za.exe -Wait -NoNewWindow -ArgumentList "x $PSScriptRoot\Hikare.7z -pBioniDKU -o$env:SYSTEMDRIVE\Bionic"
 . $PSScriptRoot\Hikarinfo.ps1
 New-Item -Path 'HKCU:\SOFTWARE' -Name Hikaru-chan
-Set-ItemProperty -Path "HKCU:\Software\Hikaru-chan" -Name "Version" -Value "22109.$version" -Force
+Set-ItemProperty -Path "HKCU:\Software\Hikaru-chan" -Name "Version" -Value "22108.$version" -Force
 Move-Item -Path "$PSScriptRoot\Hikarinfo.ps1" -Destination "$env:SYSTEMDRIVE\Bionic\Hikarefresh\HikarinFOLD.ps1"

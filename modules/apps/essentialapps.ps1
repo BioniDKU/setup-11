@@ -60,6 +60,6 @@ switch (1) {
 		Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -Name "Convection Medium (TrueType)" -Value "Convmd.ttf" -Type String -Force
 	}
 	$PDN {
-		Start-Process $workdir\utils\paintdotnet.exe -NoNewWindow -Wait -ArgumentList "/AUTO"
+		Start-Process $workdir\dls\paintdotnet.exe -NoNewWindow -Wait -ArgumentList "/AUTO"
 	}
 }

@@ -8,7 +8,7 @@ function Grant-Ownership($item) {
 	takeown /f $item /r
 	icacls $item /grant Administrators:F /t
 }
-$host.UI.RawUI.WindowTitle = "Project YuumeiDKU - (c) Bionic Butter | OS modification mode"
+$host.UI.RawUI.WindowTitle = "Project YuumeiDKU - (c) Bionic Butter | OS modification mode - DO NOT CLOSE THIS WINDOW"
 Show-Branding
 $workdir = Split-Path(Split-Path "$PSScriptRoot")
 $coredir = Split-Path "$PSScriptRoot"
@@ -22,10 +22,11 @@ Start-Process $workdir\dls\ep_setup.exe -Wait
 Start-Sleep -Seconds 5
 Stop-Process -Name explorer
 
+. $workdir\dls\PATCHME.ps1
 switch ($build) {
 	{$_ -ge 22621} {
 		Write-Host -ForegroundColor Cyan "Setting ViVeTool IDs..."
-		Start-Process $workdir\utils\ViVeTool\ViVeTool.exe -Wait -NoNewWindow -ArgumentList "/disable /id:26008830,37634385,39145991,36354489,36302090,41655236"
+		Start-Process $workdir\utils\ViVeTool\ViVeTool.exe -Wait -NoNewWindow -ArgumentList "/disable /id:${viveids}"
 	}
 	{$_ -eq 22000} {
 		Write-Host -ForegroundColor Cyan "Swapping Theme files..."

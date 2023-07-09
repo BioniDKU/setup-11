@@ -26,8 +26,10 @@ if ($wupdated -eq 1) {
 		exit
 	} else {
 		Show-Branding
-		Write-Host "Your system have reached the desired UBR." -ForegroundColor Black -BackgroundColor Green -n; Write-Host " If you wish to continue updating, press CTRL+C within 10 seconds." -ForegroundColor Cyan
-		Show-WaitTime 10
+		$remote = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").RunningThisRemotely
+		if ($remote -eq 1) {$sec = 30} else {$sec = 10}
+		Write-Host "Your system have reached the desired UBR." -ForegroundColor Black -BackgroundColor Green -n; Write-Host " If you wish to continue updating, press CTRL+C within $sec seconds." -ForegroundColor Cyan
+		Show-WaitTime $sec
 		Set-ItemProperty -Path "HKCU:\Software\AutoIDKU" -Name "Hikancel" -Value 0 -Type DWord -Force
 		exit
 	}
@@ -41,3 +43,4 @@ else {
 	Set-ItemProperty -Path "HKCU:\Software\AutoIDKU" -Name "Hikancel" -Value 0 -Type DWord -Force
 	exit
 }
+

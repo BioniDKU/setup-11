@@ -38,7 +38,7 @@ if ($autoidku -eq $false) {
 }
 
 # Find the build number, UBR of the system
-# This script only works with General Availability builds of Windows 11, which is currently 22000 and 22621. Modify the lines below for running on any other builds is STRONGLY DISENCOURAGED, as velocity IDs are different across builds, thus may make modifications fail.
+# This script only works with General Availability builds of Windows 11, which are currently 22000 and 22621. Modify the lines below for running on any other builds is STRONGLY DISENCOURAGED, as velocity IDs are different across builds, thus may make modifications fail.
 Write-Host -ForegroundColor Cyan -BackgroundColor DarkGray "Checking your PC"
 $build = [System.Environment]::OSVersion.Version | Select-Object -ExpandProperty "Build"
 $ubr = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').UBR
