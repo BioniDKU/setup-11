@@ -14,8 +14,8 @@ $coredir = Split-Path "$PSScriptRoot"
 
 # Script build number
 $releasetype = "Beta Release"
-$releaseid = "23010.100_beta3"
-$releaseidex = "23010.100_b3.oseprod_betarel.230708-1714"
+$releaseid = "23010.100_beta4a"
+$releaseidex = "23010.100_b4a.oseprod_betarel.230710-1126"
 
 # Is the bootstrap process already completed?
 $booted = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU" -ErrorAction SilentlyContinue).BootStrapped
@@ -72,10 +72,9 @@ Set-AutoIDKUValue str "ReleaseType" $releasetype
 Set-AutoIDKUValue str "ReleaseID" $releaseid
 Set-AutoIDKUValue str "ReleaseIDEx" $releaseidex
 New-Item -Path 'HKCU:\SOFTWARE\AutoIDKU' -Name Music
-#for ($m = 1; $m -le 5; $m++) {
-#	Set-ItemProperty -Path "HKCU:\Software\AutoIDKU\Music" -Name $m -Value 1 -Type DWord -Force
-#}
-Set-ItemProperty -Path "HKCU:\Software\AutoIDKU\Music" -Name 1 -Value 1 -Type DWord -Force
+for ($m = 1; $m -le 3; $m++) {
+	Set-ItemProperty -Path "HKCU:\Software\AutoIDKU\Music" -Name $m -Value 1 -Type DWord -Force
+}
 New-Item -Path 'HKCU:\SOFTWARE\AutoIDKU' -Name Apps
 Set-AutoIDKUValue app WinaeroTweaker 1
 Set-AutoIDKUValue app OpenShell 1

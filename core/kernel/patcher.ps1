@@ -13,7 +13,6 @@ Show-Branding
 $workdir = Split-Path(Split-Path "$PSScriptRoot")
 $coredir = Split-Path "$PSScriptRoot"
 $build = [System.Environment]::OSVersion.Version | Select-Object -ExpandProperty "Build"
-#$ubr = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').UBR
 
 Write-Host -ForegroundColor Cyan -BackgroundColor DarkGray "Performing critical modifications"
 

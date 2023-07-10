@@ -11,7 +11,7 @@ if ($mexists -eq $true) {exit}
 Show-Branding
 Import-Module BitsTransfer
 
-for ($c = 1; $c -le 5; $c++) {
+for ($c = 1; $c -le 3; $c++) {
 	$cv = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Music").$c
 	if ($cv -eq 1) {
 		Write-Host "Downloading category $c..." -ForegroundColor White
