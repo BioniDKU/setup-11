@@ -14,8 +14,8 @@ $coredir = Split-Path "$PSScriptRoot"
 
 # Script build number
 $releasetype = "Beta Release"
-$releaseid = "23010.100_beta4a"
-$releaseidex = "23010.100_b4a.oseprod_betarel.230710-1126"
+$releaseid = "23010.100_beta5"
+$releaseidex = "23010.100_b5.oseprod_betarel.230828-1126"
 
 # Is the bootstrap process already completed?
 $booted = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU" -ErrorAction SilentlyContinue).BootStrapped
@@ -116,7 +116,7 @@ Set-AutoIDKUValue d "EssentialApps" 1
 Set-AutoIDKUValue d "WUmodeSwitch" 1
 Set-AutoIDKUValue d "EdgeKilled"  0
 Set-AutoIDKUValue d "PendingRebootCount" 0
-Set-AutoIDKUValue d "RunningThisRemotely" 0
+Set-AutoIDKUValue d "RunningThisRSwitch" 0
 Set-AutoIDKUValue d "ClearBootMessage" 0
 Set-AutoIDKUValue d "DarkSakura" 0
 Stop-Service -Name wuauserv -ErrorAction SilentlyContinue

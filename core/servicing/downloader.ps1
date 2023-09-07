@@ -12,6 +12,7 @@ function Start-DownloadLoop($link,$destfile,$name) {
 	}
 }
 
+$VLCver = "3.0.18"; $OShellDispver = "4.4.191"; $OShellExecver = "4_4_191"; $NPPver = "8.5.6"; $SXver = "15.0.0"
 
 $WinaeroTweaker = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").WinaeroTweaker
 $OpenShell      = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").OpenShell
@@ -22,19 +23,21 @@ $PDN            = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").PDN
 $PENM           = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").PENM
 $ClassicTM      = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").ClassicTM
 $DesktopInfo    = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").DesktopInfo
+$VLC            = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU\Apps").VLC
 $essentialnone  = $false
 function Write-AppsList($action) {
 	Write-Host -ForegroundColor Cyan "The following programs will be $action"
 	switch (1) {
 		$WinaeroTweaker {Write-Host -ForegroundColor Cyan "- Winaero Tweaker"} #dl1
-		$OpenShell      {Write-Host -ForegroundColor Cyan "- Open-Shell" -n; Write-Host " (4.4.170)"} #dl2
+		$OpenShell      {Write-Host -ForegroundColor Cyan "- Open-Shell" -n; Write-Host " ($OShellver)"} #dl2
 		$Firefox        {Write-Host -ForegroundColor Cyan "- Mozilla Firefox ESR"} #dl6
-		$NPP            {Write-Host -ForegroundColor Cyan "- Notepad++" -n; Write-Host " (8.5)"} #dl8
-		$ShareX         {Write-Host -ForegroundColor Cyan "- ShareX" -n; Write-Host " (13.1.0)"} #dl9
+		$NPP            {Write-Host -ForegroundColor Cyan "- Notepad++" -n; Write-Host " ($NPPver)"} #dl8
+		$ShareX         {Write-Host -ForegroundColor Cyan "- ShareX" -n; Write-Host " ($SXver)"} #dl9
 		$PDN            {Write-Host -ForegroundColor Cyan "- Paint.NET"} #dl10
 		$PENM           {Write-Host -ForegroundColor Cyan "- PENetwork Manager"} #dl5
 		$ClassicTM      {Write-Host -ForegroundColor Cyan "- Classic Task Manager & Classic System Configuration"} #dl11 but same as dl5
 		$DesktopInfo    {Write-Host -ForegroundColor Cyan "- DesktopInfo" -n; Write-Host " (2.10.2, with custom configuration)"}
+		$VLC            {Write-Host -ForegroundColor Cyan "- VLC" -n; Write-Host " ($VLCver)"} #dlX, we already have dl10
 		default {
 			Write-Host -ForegroundColor Red "You selected NONE, are you kidding me???"
 			$essentialnone = $true
@@ -99,10 +102,11 @@ if ($esapps -eq 1) {
 		Import-Module BitsTransfer
 		# Download links
 		$dl1 = "https://winaerotweaker.com/download/winaerotweaker.zip"
-		$dl2 = "https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v4.4.170/OpenShellSetup_4_4_170.exe"
+		$dl2 = "https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v${OShellDispver}/OpenShellSetup_${OShellExecver}.exe"
 		$dl6 = "https://download.mozilla.org/?product=firefox-esr-latest&os=win64&lang=en-US"
-		$dl8 = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5/npp.8.5.Installer.x64.exe"
-		$dl9 = "https://github.com/ShareX/ShareX/releases/download/v13.1.0/ShareX-13.1.0-setup.exe"
+		$dl8 = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v${NPPver}/npp.${NPPver}.Installer.x64.exe"
+		$dl9 = "https://github.com/ShareX/ShareX/releases/download/v${SXver}/ShareX-${SXver}-setup.exe"
+		$dlX = "https://get.videolan.org/vlc/${VLCver}/win64/vlc-${VLCver}-win64.exe"
 		$dl10 = "https://github.com/Bionic-OSE/YuumeiDKU-utils/raw/utils/active/paintdotnet.exe"
 		
 		# Download'em all
@@ -112,6 +116,7 @@ if ($esapps -eq 1) {
 			$Firefox {Start-DownloadLoop $dl6 firefoxesr.exe "Firefox ESR"}
 			$NPP {Start-DownloadLoop $dl8 npp.exe "Notepad++"}
 			$ShareX {Start-DownloadLoop $dl9 sharex462.exe "ShareX"}
+			$VLC {Start-DownloadLoop $dlX vlc.exe "VLC"}
 		}
 	}
 }

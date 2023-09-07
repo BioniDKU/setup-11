@@ -149,9 +149,14 @@ function Check-EnoughActions {
 		}
 	}
 }
+function Show-WelcomeText {
+	Write-Host -ForegroundColor White "You're running Windows $editiontype $editiond, OS build"$build"."$ubr
+	Write-Host -ForegroundColor Magenta "Welcome to YuumeiDKU!"
+}
 
 $confulee = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").ConfigEditing
 $confuone = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").ChangesMade
+$remotesw = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").RunningThisRSwitch
 if ($confulee -eq 2) {$confules = 2} elseif ($confulee -eq 3) {$confules = 3}
 else {
 	$snareason2 = " - You did not select enough options in Advanced script configuration to proceed.`r`n   Try select a few more options, and try again."
@@ -163,8 +168,7 @@ else {
 		default {$startallowed = $true}
 	}
 	Show-Branding clear
-	Write-Host -ForegroundColor White "You're running Windows $editiontype $editiond, OS build"$build"."$ubr
-	Write-Host -ForegroundColor Magenta "Welcome to YuumeiDKU!"
+	Show-WelcomeText
 	switch ($startallowed) {
 		{$_ -eq $false} {
 			$stcolor = "DarkGray" 
@@ -180,9 +184,9 @@ else {
 			$stcolor = "White"
 		}
 	}
-	if (Get-RemoteSoftware) {
+	if ($remotesw -eq 1) {
 		Write-Host " "
-		Write-Host "HINT: " -ForegroundColor Magenta -n; Write-Host "Running this remotely? " -ForegroundColor White -n; Write-Host 'Select 2 and enable "Increase wait time" to make your life easier!' -ForegroundColor Cyan
+		Write-Host "NOTE: " -ForegroundColor Black -BackgroundColor Yellow; Write-Host ' - Increase wait time is enabled. The script will wait 30 seconds on every system restart before continuing or until you press CTRL+C. You can toggle this option by selecting action 2.' -ForegroundColor White
 	}
 	Write-Host " "
 	Write-Host -ForegroundColor Yellow "What do you want to do?"
@@ -228,7 +232,7 @@ switch ($confules) {
 		Set-ItemProperty -Path "HKCU:\Software\AutoIDKU" -Name "ConfigSet" -Value 3 -Type DWord -Force
 		Set-ItemProperty -Path "HKCU:\Software\AutoIDKU" -Name "ConfigEditing" -Value 2 -Type DWord -Force
 		Show-Branding clear
-		Write-Host -ForegroundColor Magenta "Welcome to YuumeiDKU!"
+		Show-WelcomeText
 		$setwallpaper = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").SetWallpaper
 		$setupmusic = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").HikaruMusic
 		$increasewait = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").RunningThisRemotely

@@ -26,6 +26,7 @@ switch ($true) {
 		Write-Host -ForegroundColor Cyan -BackgroundColor DarkGray "Setting Explorer to open on This PC" -n; Write-Host " (will take effect next time Explorer starts)"
 		Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'LaunchTo' -Value 1 -Type DWord -Force
 	}
+	{$remotesw -eq 1} {Set-AutoIDKUValue d "RunningThisRemotely" 1} else {Set-AutoIDKUValue d "RunningThisRemotely" 0}
 }
 
 $windowsupdatesw = (Get-ItemProperty -Path "HKCU:\Software\AutoIDKU").WUmodeSwitch
